@@ -4,8 +4,6 @@ from selenium.webdriver.common.by import By
 from datetime import datetime
 import time
 import json
-import sys
-import main
 
 
 
@@ -144,6 +142,7 @@ def actions_on_the_site(workshop: str):
                 # Проверка статуса заказа.
                 status_order = True
                 while status_order:
+                    time.sleep(5)
                     if not status_order_threading:
                         break
                     try:
@@ -155,7 +154,7 @@ def actions_on_the_site(workshop: str):
                         else:
                             status_order = False
                     except Exception as e:
-                        logging_an_error_to_a_file(exception=str(e), stage=f"Проверка статуса заказа")
+                        pass
                 order_codes_for_product(driver, workshop_id, product_id, quantity)
                 driver.find_element(By.ID, "logout_link").click()
                 # Обновление прогресса.
