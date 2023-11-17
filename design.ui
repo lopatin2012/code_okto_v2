@@ -322,6 +322,91 @@
      <attribute name="title">
       <string>Настройки приложения</string>
      </attribute>
+     <widget class="QPushButton" name="table_2_settings_push_button_save_settings">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>480</y>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="table_2_settings_table_widget_every_days">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>641</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <property name="rowCount">
+       <number>0</number>
+      </property>
+      <property name="columnCount">
+       <number>3</number>
+      </property>
+      <column>
+       <property name="text">
+        <string>Цех</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>День недели</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Заказ</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="table_2_settings_label_for_table_every_days">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>70</y>
+        <width>291</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Автоматический заказ кодов для цехов</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="table_2_settings_check_box_for_table_every_days">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>30</y>
+        <width>321</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Статус автоматического заказа кодов</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

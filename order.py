@@ -30,7 +30,7 @@ def logging_an_error_to_a_file(exception: str, stage: str):
 
 # Загрузка настроек.
 def load_settings():
-    with open("settings", "r", encoding="UTF-8") as file_settings:
+    with open("settings.json", "r", encoding="UTF-8") as file_settings:
         return json.load(file_settings)
 
 
