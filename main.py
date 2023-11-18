@@ -418,6 +418,9 @@ if __name__ == "__main__":
                         and data[workshop]["time"] == datetime.now().strftime("%H:%M"):
                     start_order_codes_by_clicking(name_workshop=workshop)
                     time.sleep(60)
+                elif data[workshop]["day"] == "Все дни":
+                    start_order_codes_by_clicking(name_workshop=workshop)
+                    time.sleep(60)
                 time.sleep(1)
 
 
