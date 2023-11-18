@@ -1,0 +1,25 @@
+{
+    "workshops": {
+        "Первый цех": {
+            "status_order": true,
+            "day": "Пятница",
+            "time": "01:00"
+        },
+        "Кисломолочный цех": {
+            "status_order": true,
+            "day": "Суббота",
+            "time": "16:02"
+        },
+        "Цех стерилизованного молока": {
+            "status_order": true,
+            "day": "Все дни",
+            "time": "05:00"
+        },
+        "Творожный цех": {
+            "status_order": true,
+            "day": "Воскресенье",
+            "time": "01:00"
+        }
+    },
+    "status_order_every_days": false
+}

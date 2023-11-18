@@ -19,7 +19,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setFont(font)
         self.centralwidget.setObjectName("centralwidget")
         self.workshop_frame = QtWidgets.QFrame(parent=self.centralwidget)
-        self.workshop_frame.setGeometry(QtCore.QRect(680, 20, 301, 361))
+        self.workshop_frame.setGeometry(QtCore.QRect(680, 20, 301, 371))
         self.workshop_frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.workshop_frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.workshop_frame.setObjectName("workshop_frame")
@@ -67,24 +67,33 @@ class Ui_MainWindow(object):
         self.workshop_button_4.setFont(font)
         self.workshop_button_4.setObjectName("workshop_button_4")
         self.progressBar = QtWidgets.QProgressBar(parent=self.workshop_frame)
-        self.progressBar.setGeometry(QtCore.QRect(10, 270, 281, 23))
+        self.progressBar.setGeometry(QtCore.QRect(10, 250, 281, 23))
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName("progressBar")
         self.label = QtWidgets.QLabel(parent=self.workshop_frame)
-        self.label.setGeometry(QtCore.QRect(10, 225, 281, 21))
+        self.label.setGeometry(QtCore.QRect(10, 220, 281, 21))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setObjectName("label")
         self.workshop_end_stoping_order = QtWidgets.QPushButton(parent=self.workshop_frame)
-        self.workshop_end_stoping_order.setGeometry(QtCore.QRect(10, 310, 271, 31))
+        self.workshop_end_stoping_order.setGeometry(QtCore.QRect(10, 290, 271, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.workshop_end_stoping_order.setFont(font)
         self.workshop_end_stoping_order.setObjectName("workshop_end_stoping_order")
+        self.workshop_status_text = QtWidgets.QLabel(parent=self.workshop_frame)
+        self.workshop_status_text.setEnabled(False)
+        self.workshop_status_text.setGeometry(QtCore.QRect(16, 340, 271, 20))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.workshop_status_text.setFont(font)
+        self.workshop_status_text.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
+        self.workshop_status_text.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.workshop_status_text.setObjectName("workshop_status_text")
         self.settings_frame = QtWidgets.QTabWidget(parent=self.centralwidget)
         self.settings_frame.setGeometry(QtCore.QRect(10, 10, 671, 561))
         self.settings_frame.setObjectName("settings_frame")
@@ -131,7 +140,7 @@ class Ui_MainWindow(object):
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
         self.table_2_settings_push_button_save_settings = QtWidgets.QPushButton(parent=self.tab_2)
-        self.table_2_settings_push_button_save_settings.setGeometry(QtCore.QRect(240, 480, 151, 31))
+        self.table_2_settings_push_button_save_settings.setGeometry(QtCore.QRect(240, 410, 151, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.table_2_settings_push_button_save_settings.setFont(font)
@@ -154,11 +163,17 @@ class Ui_MainWindow(object):
         self.table_2_settings_label_for_table_every_days.setFont(font)
         self.table_2_settings_label_for_table_every_days.setObjectName("table_2_settings_label_for_table_every_days")
         self.table_2_settings_check_box_for_table_every_days = QtWidgets.QCheckBox(parent=self.tab_2)
-        self.table_2_settings_check_box_for_table_every_days.setGeometry(QtCore.QRect(180, 30, 321, 17))
+        self.table_2_settings_check_box_for_table_every_days.setGeometry(QtCore.QRect(180, 10, 321, 41))
         font = QtGui.QFont()
         font.setPointSize(13)
         self.table_2_settings_check_box_for_table_every_days.setFont(font)
         self.table_2_settings_check_box_for_table_every_days.setObjectName("table_2_settings_check_box_for_table_every_days")
+        self.table_2_settings_push_button_auto_order_codes = QtWidgets.QPushButton(parent=self.tab_2)
+        self.table_2_settings_push_button_auto_order_codes.setGeometry(QtCore.QRect(220, 460, 191, 41))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.table_2_settings_push_button_auto_order_codes.setFont(font)
+        self.table_2_settings_push_button_auto_order_codes.setObjectName("table_2_settings_push_button_auto_order_codes")
         self.settings_frame.addTab(self.tab_2, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(parent=MainWindow)
@@ -184,6 +199,7 @@ class Ui_MainWindow(object):
         self.workshop_button_4.setText(_translate("MainWindow", "Пустая кнопка"))
         self.label.setText(_translate("MainWindow", "Прогресс заказа кодов"))
         self.workshop_end_stoping_order.setText(_translate("MainWindow", "Остановить заказ"))
+        self.workshop_status_text.setText(_translate("MainWindow", "Текущее состояние: можно заказывать"))
         item = self.table_workshop_codes.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Код продукта"))
         item = self.table_workshop_codes.horizontalHeaderItem(1)
@@ -202,9 +218,10 @@ class Ui_MainWindow(object):
         item = self.table_2_settings_table_widget_every_days.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "День недели"))
         item = self.table_2_settings_table_widget_every_days.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Заказ"))
+        item.setText(_translate("MainWindow", "Время"))
         self.table_2_settings_label_for_table_every_days.setText(_translate("MainWindow", "Автоматический заказ кодов для цехов"))
         self.table_2_settings_check_box_for_table_every_days.setText(_translate("MainWindow", "Статус автоматического заказа кодов"))
+        self.table_2_settings_push_button_auto_order_codes.setText(_translate("MainWindow", "Запустить авто-заказ"))
         self.settings_frame.setTabText(self.settings_frame.indexOf(self.tab_2), _translate("MainWindow", "Настройки приложения"))
         self.json_products.setText(_translate("MainWindow", "Изменить заказ"))
         self.auto_order.setText(_translate("MainWindow", "Изменить авто-заказ"))
@@ -216,10 +233,19 @@ if __name__ == "__main__":
     import json
     import threading
     import time
+    from datetime import datetime
+    from PyQt6.QtCore import Qt
     from PyQt6.QtWidgets import QTableWidgetItem, QComboBox
 
+    status_auto_orders: bool = False
 
-    def re_translate_ui(MainWindow):
+
+    def re_translate_ui(MainWindow) -> None:
+        """
+        Переименовывание кнопок на название цеха из файла lk.json.
+        :param MainWindow:
+        :return None:
+        """
         _translate = QtCore.QCoreApplication.translate
         with open("lk.json", "r", encoding="UTF-8") as file_lk:
             name_workshop = list(json.load(file_lk))
@@ -232,8 +258,11 @@ if __name__ == "__main__":
             pass
 
 
-    def size_column_table_with_codes():
-        # Изменение размеров колонок в таблице с кодами.
+    def size_column_table_with_codes() -> None:
+        """
+        Изменение размеров колонок в таблице с кодами.
+        :return None:
+        """
         # Код продукта.
         ui.table_workshop_codes.setColumnWidth(0, 80)
         # Наименование продукта.
@@ -242,6 +271,7 @@ if __name__ == "__main__":
         ui.table_workshop_codes.setColumnWidth(2, 50)
         # Количество кодов в заказе.
         ui.table_workshop_codes.setColumnWidth(3, 75)
+
 
     def size_column_table_with_auto_order() -> None:
         """
@@ -256,23 +286,35 @@ if __name__ == "__main__":
         ui.table_2_settings_table_widget_every_days.setColumnWidth(2, 100)
 
 
-    def update_from_json_in_table_with_workshop():
+    def load_from_json_in_table_with_workshop() -> None:
         """
-        Обновление содержимого таблицы с цехами в таблице автоматического заказа кодов.
+        Выгрузка настроек с цехами в таблице автоматического заказа кодов.
         :return:
         """
+        list_days = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье", "Все дни"]
+        combo_box_days = QComboBox()
+        combo_box_days.addItem("Понедельник")
         data = order.load_settings()
         status_order_every_days = data["status_order_every_days"]
         ui.table_2_settings_check_box_for_table_every_days.setChecked(status_order_every_days)
         count_row = len(data["workshops"])
         ui.table_2_settings_table_widget_every_days.setRowCount(count_row)
-        print(count_row)
-        for workshop in data["workshops"]:
-            print(data["workshops"][workshop])
+        for index, workshop in enumerate(data["workshops"], 0):
+            combo_box_days = QComboBox()
+            combo_box_days.addItems(list_days)
+            combo_box_days.setCurrentText(data["workshops"][workshop]["day"])
+            ui.table_2_settings_table_widget_every_days.setItem(index, 0, QTableWidgetItem(workshop))
+            ui.table_2_settings_table_widget_every_days.setCellWidget(index, 1, combo_box_days)
+            ui.table_2_settings_table_widget_every_days.setItem(index, 2,
+                                                                QTableWidgetItem(data["workshops"][workshop]["time"]))
 
 
-    def update_from_json_in_table_with_codes(workshop: str):
-        # Заполнение таблицы данными из json-файла по цеху.
+    def update_from_json_in_table_with_codes(workshop: str) -> None:
+        """
+        Заполнение таблицы данными из json-файла по цеху.
+        :param workshop:
+        :return None:
+        """
         products = order.load_products()[workshop]
         count_row = len(products)
         if count_row >= 1:
@@ -283,7 +325,6 @@ if __name__ == "__main__":
                 combo_box.addItem("False")
                 ui.table_workshop_codes.setItem(index, 0, QTableWidgetItem(row))
                 ui.table_workshop_codes.setItem(index, 1, QTableWidgetItem(products[row]["name"]))
-                ui.table_workshop_codes.setCellWidget(index, 2, combo_box)
                 if products[row]["order"]:
                     ui.table_workshop_codes.setCellWidget(index, 2, combo_box)
                 else:
@@ -293,12 +334,21 @@ if __name__ == "__main__":
                 ui.table_workshop_codes.setItem(index, 3, QTableWidgetItem(str(products[row]["quantity"])))
 
 
-    def update_combox_in_table_with_codes():
-        # Обновление выпадающего списка в таблице с кодами.
+    def update_combox_in_table_with_codes() -> None:
+        """
+        Обновление выпадающего списка в таблице с кодами.
+        :return:
+        """
         for workshop in order.load_workshops():
             ui.table_workshop_drop_down_list.addItem(workshop)
 
-    def update_json_file_products():
+
+    def update_json_file_products() -> None:
+        """
+        Обновление файла с продуктами по кнопке "Сохранить".
+        Сохраняется количество и статус.
+        :return None:
+        """
         row = ui.table_workshop_codes.rowCount()
         workshop = ui.table_workshop_drop_down_list.currentText()
         data = order.load_products()
@@ -315,12 +365,19 @@ if __name__ == "__main__":
             json.dump(data, file_products, indent=4, ensure_ascii=False)
 
 
-    def get_current_value_from_table_with_codes():
-        # Получение название цеха из выпадающего списка в таблице с кодами.
+    def get_current_value_from_table_with_codes() -> None:
+        """
+        Получение название цеха из выпадающего списка в таблице с кодами.
+        :return:
+        """
         update_from_json_in_table_with_codes(ui.table_workshop_drop_down_list.currentText())
 
 
-    def update_progress_bar():
+    def update_progress_bar() -> None:
+        """
+        Обновление статус-бара по мере завершения списка заказа кодов.
+        :return None:
+        """
         while order.status_order_threading:
             time.sleep(10)
             print(order.progress)
@@ -332,8 +389,64 @@ if __name__ == "__main__":
                 ui.workshop_button_4.setEnabled(True)
 
 
-    def start_order_codes_by_clicking():
-        name_workshop = MainWindow.sender().text()
+    def get_status_auto_orders_codes() -> bool:
+        """
+        Получение статуса автоматического заказа кодов.
+        :return:
+        """
+        return ui.table_2_settings_check_box_for_table_every_days.isChecked()
+
+
+    def threading_auto_orders_codes() -> None:
+        global status_auto_orders
+        status_auto_orders = get_status_auto_orders_codes()
+        thread = threading.Thread(target=lambda: auto_orders_codes())
+        thread.start()
+
+
+    def auto_orders_codes() -> None:
+        """
+        Автоматический заказ кодов.
+        :return None:
+        """
+        data = order.load_settings()["workshops"]
+        dict_weekday = {0: "Понедельник", 1: "Вторник", 2: "Среда", 3: "Четверг",
+                        4: "Пятница", 5: "Суббота", 6: "Воскресенье", 7: "Все дни"}
+        while status_auto_orders:
+            for workshop in data:
+                if data[workshop]["day"] == dict_weekday[datetime.now().today().weekday()] \
+                        and data[workshop]["time"] == datetime.now().strftime("%H:%M"):
+                    start_order_codes_by_clicking(name_workshop=workshop)
+                    time.sleep(60)
+                time.sleep(1)
+
+
+    def save_file_settings() -> None:
+        """
+        Сохранение изменений в файл настроек.
+        :return None:
+        """
+        row = ui.table_2_settings_table_widget_every_days.rowCount()
+        data = order.load_settings()
+        for index in range(0, row):
+            workshop = ui.table_2_settings_table_widget_every_days.item(index, 0).text()
+            print(workshop)
+            data["workshops"][workshop]["day"] = ui.table_2_settings_table_widget_every_days.cellWidget(index,
+                                                                                                        1).currentText()
+            data["workshops"][workshop]["time"] = ui.table_2_settings_table_widget_every_days.item(index, 2).text()
+        data["status_order_every_days"] = get_status_auto_orders_codes()
+        with open("settings.json", "w", encoding="UTF-8") as file_settings:
+            json.dump(data, file_settings, ensure_ascii=False, indent=4)
+
+
+    def start_order_codes_by_clicking(name_workshop=None) -> None:
+        """
+        Запустить заказ кодов по цеху.
+        :param name_workshop:
+        :return None:
+        """
+        if name_workshop is None:
+            name_workshop = MainWindow.sender().text()
         threading_progress = threading.Thread(target=lambda: update_progress_bar())
         threading_progress.start()
         if name_workshop != "Пустая кнопка":
@@ -346,12 +459,27 @@ if __name__ == "__main__":
             thread.start()
 
 
-    def stop_order_codes():
+    def stop_order_codes() -> None:
+        """
+        Остановить заказ кодов.
+        :return None:
+        """
         order.status_order_threading = False
         ui.workshop_button_1.setEnabled(True)
         ui.workshop_button_2.setEnabled(True)
         ui.workshop_button_3.setEnabled(True)
         ui.workshop_button_4.setEnabled(True)
+
+
+    def close_app() -> None:
+        """
+        Выполнение функций перед завершением программы.
+        :return None:
+        """
+        global status_auto_orders
+        order.status_order_threading = False
+        status_auto_orders = False
+
 
     # UI приложения.
     app = QtWidgets.QApplication(sys.argv)
@@ -359,6 +487,9 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
 
+    #
+    # Вызов функций
+    #
     # Переименовывание кнопок.
     re_translate_ui(MainWindow)
     # Изменение размеров колонок в таблице с кодами.
@@ -374,13 +505,18 @@ if __name__ == "__main__":
     ui.workshop_button_4.clicked.connect(start_order_codes_by_clicking)
     # Подключение кнопки для получения названия цеха из выпадающего списка.
     ui.table_workshop_load_from_file.clicked.connect(get_current_value_from_table_with_codes)
-    # Подключение кнопки для истановка заказа кодов.
+    # Подключение кнопки для остановка заказа кодов.
     ui.workshop_end_stoping_order.clicked.connect(stop_order_codes)
+    # Подключение кнопки для сохранения параметров цехов автоматического заказа кодов.
+    ui.table_2_settings_push_button_save_settings.clicked.connect(save_file_settings)
+    # Подключение кнопки для запуска службы авто-заказа пока запущено окно.
+    ui.table_2_settings_push_button_auto_order_codes.clicked.connect(threading_auto_orders_codes)
     # Обновление данных в json-файлах.
     ui.table_button_save_changes_in_file.clicked.connect(update_json_file_products)
     # Установить прогресс бар на нулевое значение.
     ui.progressBar.setValue(0)
-    update_from_json_in_table_with_workshop()
+    load_from_json_in_table_with_workshop()
 
     MainWindow.show()
+    app.aboutToQuit.connect(close_app)
     sys.exit(app.exec())

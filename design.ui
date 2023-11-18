@@ -25,7 +25,7 @@
       <x>680</x>
       <y>20</y>
       <width>301</width>
-      <height>361</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -145,7 +145,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>270</y>
+       <y>250</y>
        <width>281</width>
        <height>23</height>
       </rect>
@@ -158,7 +158,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>225</y>
+       <y>220</y>
        <width>281</width>
        <height>21</height>
       </rect>
@@ -179,7 +179,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>310</y>
+       <y>290</y>
        <width>271</width>
        <height>31</height>
       </rect>
@@ -193,6 +193,33 @@
      </property>
      <property name="text">
       <string>Остановить заказ</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="workshop_status_text">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>16</x>
+       <y>340</y>
+       <width>271</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="text">
+      <string>Текущее состояние: можно заказывать</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -326,7 +353,7 @@
       <property name="geometry">
        <rect>
         <x>240</x>
-        <y>480</y>
+        <y>410</y>
         <width>151</width>
         <height>31</height>
        </rect>
@@ -367,7 +394,7 @@
       </column>
       <column>
        <property name="text">
-        <string>Заказ</string>
+        <string>Время</string>
        </property>
       </column>
      </widget>
@@ -393,9 +420,9 @@
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>30</y>
+        <y>10</y>
         <width>321</width>
-        <height>17</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -405,6 +432,24 @@
       </property>
       <property name="text">
        <string>Статус автоматического заказа кодов</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="table_2_settings_push_button_auto_order_codes">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>460</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Запустить авто-заказ</string>
       </property>
      </widget>
     </widget>
