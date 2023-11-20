@@ -380,7 +380,6 @@ if __name__ == "__main__":
         """
         while order.status_order_threading:
             time.sleep(10)
-            print(order.progress)
             ui.progressBar.setValue(order.progress)
             if order.progress == 100:
                 ui.workshop_button_1.setEnabled(True)
@@ -389,17 +388,9 @@ if __name__ == "__main__":
                 ui.workshop_button_4.setEnabled(True)
 
 
-    def get_status_auto_orders_codes() -> bool:
-        """
-        Получение статуса автоматического заказа кодов.
-        :return:
-        """
-        return ui.table_2_settings_check_box_for_table_every_days.isChecked()
-
-
     def threading_auto_orders_codes() -> None:
         global status_auto_orders
-        status_auto_orders = get_status_auto_orders_codes()
+        status_auto_orders = order.load_settings()["status_order_every_days"]
         thread = threading.Thread(target=lambda: auto_orders_codes())
         thread.start()
 
@@ -418,7 +409,8 @@ if __name__ == "__main__":
                         and data[workshop]["time"] == datetime.now().strftime("%H:%M"):
                     start_order_codes_by_clicking(name_workshop=workshop)
                     time.sleep(60)
-                elif data[workshop]["day"] == "Все дни":
+                elif data[workshop]["day"] == "Все дни" \
+                        and data[workshop]["time"] == datetime.now().strftime("%H:%M"):
                     start_order_codes_by_clicking(name_workshop=workshop)
                     time.sleep(60)
                 time.sleep(1)
@@ -433,11 +425,10 @@ if __name__ == "__main__":
         data = order.load_settings()
         for index in range(0, row):
             workshop = ui.table_2_settings_table_widget_every_days.item(index, 0).text()
-            print(workshop)
             data["workshops"][workshop]["day"] = ui.table_2_settings_table_widget_every_days.cellWidget(index,
                                                                                                         1).currentText()
             data["workshops"][workshop]["time"] = ui.table_2_settings_table_widget_every_days.item(index, 2).text()
-        data["status_order_every_days"] = get_status_auto_orders_codes()
+        data["status_order_every_days"] = ui.table_2_settings_check_box_for_table_every_days.isChecked()
         with open("settings.json", "w", encoding="UTF-8") as file_settings:
             json.dump(data, file_settings, ensure_ascii=False, indent=4)
 
@@ -502,10 +493,10 @@ if __name__ == "__main__":
     # Обновление выпадающего списка с цехами.
     update_combox_in_table_with_codes()
     # Подключение сигналов для получения названия кнопок.
-    ui.workshop_button_1.clicked.connect(start_order_codes_by_clicking)
-    ui.workshop_button_2.clicked.connect(start_order_codes_by_clicking)
-    ui.workshop_button_3.clicked.connect(start_order_codes_by_clicking)
-    ui.workshop_button_4.clicked.connect(start_order_codes_by_clicking)
+    ui.workshop_button_1.clicked.connect(lambda: start_order_codes_by_clicking(ui.workshop_button_1.text()))
+    ui.workshop_button_2.clicked.connect(lambda: start_order_codes_by_clicking(ui.workshop_button_2.text()))
+    ui.workshop_button_3.clicked.connect(lambda: start_order_codes_by_clicking(ui.workshop_button_3.text()))
+    ui.workshop_button_4.clicked.connect(lambda: start_order_codes_by_clicking(ui.workshop_button_4.text()))
     # Подключение кнопки для получения названия цеха из выпадающего списка.
     ui.table_workshop_load_from_file.clicked.connect(get_current_value_from_table_with_codes)
     # Подключение кнопки для остановка заказа кодов.
@@ -518,6 +509,9 @@ if __name__ == "__main__":
     ui.table_button_save_changes_in_file.clicked.connect(update_json_file_products)
     # Установить прогресс бар на нулевое значение.
     ui.progressBar.setValue(0)
+    # Запуск авто-заказа.
+    threading_auto_orders_codes()
+    # Загрузка настроек для авто-заказа.
     load_from_json_in_table_with_workshop()
 
     MainWindow.show()
