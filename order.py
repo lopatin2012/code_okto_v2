@@ -50,11 +50,16 @@ def order_codes_for_product(driver: WebDriver, workshop_id: str, product_id: str
     try:
         if status_order_threading:
             driver.get(URL_OKTO + workshop_id + OMS_BUSSINESS_ORDERS + NEW)
+            time.sleep(5)
             quantity_element = driver.find_element(By.ID, "quantity")
+            time.sleep(1)
             quantity_element.clear()
+            time.sleep(1)
             quantity_element.send_keys(quantity)
+            time.sleep(1)
             driver.execute_script(f"arguments[0].setAttribute('value', '{product_id}')",
                                   driver.find_element(By.ID, "product_id"))
+            time.sleep(1)
             driver.find_element(By.NAME, "commit").click()
             time.sleep(3)
             status = True
@@ -63,7 +68,7 @@ def order_codes_for_product(driver: WebDriver, workshop_id: str, product_id: str
                     break
                 driver.get(URL_OKTO + workshop_id + OMS_BUSSINESS_ORDERS)
                 if driver.find_element(By.CLASS_NAME, "order-id").text == "Обработка...":
-                    time.sleep(30)
+                    time.sleep(5)
                     driver.refresh()
                 if driver.find_element(By.CLASS_NAME, "report-status").text == CODE_READY:
                     time.sleep(5)
@@ -74,11 +79,15 @@ def order_codes_for_product(driver: WebDriver, workshop_id: str, product_id: str
                     driver.find_element(By.ID, "obtain_identification_codes").click()
                     time.sleep(5)
                     quantity_element = driver.find_element(By.ID, "quantity")
+                    time.sleep(1)
                     quantity_element.clear()
+                    time.sleep(1)
                     quantity_element.send_keys(quantity)
+                    time.sleep(1)
                     driver.find_element(By.ID, "submit_codes_form").click()
+                    time.sleep(1)
                     status = False
-                time.sleep(10)
+                time.sleep(5)
                 driver.refresh()
         else:
             driver.quit()
@@ -103,6 +112,7 @@ def actions_on_the_site(workshop: str):
     options.add_argument("--disable-gpu")  # Уменьшение потребления графических ресурсов.
     options.add_argument("--disable_notification")  # Отключение уведомлений.
     options.add_argument("--disable-dev-shm-usage")  # Отключение /dev/shm в Chrome
+    options.add_argument("--start-maximized")  # окно на весь экран
     options.add_argument("--no-sandbox")  # Отключение режима песочницы.
     driver = webdriver.Chrome(options=options)
     driver.get("http://app.okto.ru/users/sign_in")
@@ -122,20 +132,26 @@ def actions_on_the_site(workshop: str):
                 product_id = load_products()[workshop][product]["id"]
                 # Авторизация пользователя.
                 try:
+                    time.sleep(5)
                     driver.find_element(By.ID, "user_email").send_keys(user_email)
+                    time.sleep(1)
                     driver.find_element(By.ID, "user_password").send_keys(user_password)
+                    time.sleep(1)
                     driver.find_element(By.ID, "sign_in_btn").click()
+                    time.sleep(1)
                 except Exception as e:
                     status_order_threading = False
                     logging_an_error_to_a_file(exception=str(e), stage="Авторизация пользователя")
 
                 # Проверка наличия токена.
                 try:
+                    time.sleep(5)
                     driver.get(URL_OKTO + workshop_id + OMS_SETTINGS + oms_id + EDIT),
+                    time.sleep(2)
                     if driver.find_element(By.CLASS_NAME,
                                            "oms-auth-btn-container").text != "Динамический токен получен":
                         driver.find_element(By.ID, "obtain_oms_token_btn").click()
-                    time.sleep(10)
+                    time.sleep(5)
                 except Exception as e:
                     status_order_threading = False
                     logging_an_error_to_a_file(exception=str(e), stage=f"Проверка токена СУЗ. Токен не получен")
@@ -146,16 +162,20 @@ def actions_on_the_site(workshop: str):
                     if not status_order_threading:
                         break
                     try:
+                        time.sleep(1)
                         driver.get(URL_OKTO + workshop_id + OMS_BUSSINESS_ORDERS)
+                        time.sleep(1)
                         if driver.find_element(By.CLASS_NAME,
                                                "report-status").text == CODE_READY:
-                            time.sleep(30)
+                            time.sleep(5)
                             driver.refresh()
                         else:
                             status_order = False
                     except Exception as e:
                         pass
+                time.sleep(1)
                 order_codes_for_product(driver, workshop_id, product_id, quantity)
+                time.sleep(5)
                 driver.find_element(By.ID, "logout_link").click()
                 # Обновление прогресса.
                 progress = int((counter_file.index(product) + 1) / len(counter_file) * 100)
